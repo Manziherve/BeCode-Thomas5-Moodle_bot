@@ -28,10 +28,6 @@ moodle-bot/
 ├── .env 🔐 Environment variables (excluded from Git)
 
 
-yaml
-Copier
-Modifier
-
 ---
 
 🧠 How it works
@@ -145,6 +141,19 @@ You can simulate any action manually:
 python checkin.py athome
 python checkin.py atcampus
 python checkout.py
+
+
+## 🗂️ Project Structure
+
+moodle-bot/
+├── .github/
+│ └── workflows/
+│ └── moodle_automation.yml 🧠 GitHub Actions workflow (scheduled)
+├── main_scheduler.py 🚀 Main script – decides when to check in/out
+├── checkin.py ✅ Script for check-in
+├── checkout.py 🔴 Script for check-out
+├── requirements.txt 📦 Python dependencies
+├── .env 🔐 Environment variables (excluded from Git)
 
 
 📦 requirements.txt
