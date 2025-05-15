@@ -10,7 +10,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  moodle-bot:
+  run-scheduler:
     runs-on: ubuntu-latest
 
     env:
@@ -33,11 +33,5 @@ jobs:
           pip install -r requirements.txt
           playwright install
 
-      - name: Decide which script to run based on current time
-        run: |
-          HOUR=$(date -u +"%H:%M")
-          echo "Current UTC time: $HOUR"
-
-          if [ "$HOUR" == "06:55" ]; then
-            echo "Running checkin (08:55 Brussels)"
-            pyt
+      - name: Run main scheduler
+        run: python main_scheduler.py
