@@ -2,11 +2,15 @@ name: Moodle Scheduler
 
 on:
   schedule:
-    - cron: '25 11 * * 1-5'  # 13h25 Brussels time = 11h25 UTC
+    - cron: '55 6 * * 1-5'       # Checkin at 06:55 UTC (08:55 Brussels)  Monday to Friday
+    - cron: '30 10 * * 1-5'      # Checkout at 10:30 UTC (12:30 Brussels) Monday to Friday
+    - cron: '25 11 * * 1-5'      # Checkin at 11:25 UTC (13:25 Brussels)  Monday to Friday
+    - cron: '0 15 * * 1-5'       # Checkout at 15:00 UTC (17:00 Brussels) Monday to Friday
+
   workflow_dispatch:
 
 jobs:
-  run-scheduler:
+  moodle-bot:
     runs-on: ubuntu-latest
 
     env:
@@ -25,10 +29,15 @@ jobs:
           python-version: '3.10'
 
       - name: Install dependencies
-        run: pip install -r requirements.txt
+        run: |
+          pip install -r requirements.txt
+          playwright install
 
-      - name: Install Playwright browsers
-        run: playwright install
+      - name: Decide which script to run based on current time
+        run: |
+          HOUR=$(date -u +"%H:%M")
+          echo "Current UTC time: $HOUR"
 
-      - name: Run Main
-        run: python main_scheduler.py
+          if [ "$HOUR" == "06:55" ]; then
+            echo "Running checkin (08:55 Brussels)"
+            pyt
