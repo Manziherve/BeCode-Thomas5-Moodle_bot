@@ -1,0 +1,34 @@
+name: Moodle Scheduler
+
+on:
+  schedule:
+    - cron: '25 11 * * 1-5'  # 13h25 Brussels time = 11h25 UTC
+  workflow_dispatch:
+
+jobs:
+  run-scheduler:
+    runs-on: ubuntu-latest
+
+    env:
+      MOODLE_USERNAME: ${{ secrets.MOODLE_USERNAME }}
+      MOODLE_PASSWORD: ${{ secrets.MOODLE_PASSWORD }}
+      ICAL_URL: ${{ secrets.ICAL_URL }}
+      DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Install Playwright browsers
+        run: playwright install
+
+      - name: Run Main
+        run: python main_scheduler.py
