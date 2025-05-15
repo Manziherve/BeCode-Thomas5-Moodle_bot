@@ -1,0 +1,4 @@
+ics==0.7.1
+requests
+playwright
+python-dotenv
