@@ -13,21 +13,6 @@ It automatically performs check-ins and check-outs on a fixed daily schedule (e.
 
 🔐 Keeps your credentials safe using environment variables
 
-
-
-## 🗂️ Project Structure
-
-moodle-bot/
-├── .github/
-│ └── workflows/
-│ └── moodle_automation.yml 🧠 GitHub Actions workflow (scheduled)
-├── main_scheduler.py 🚀 Main script – decides when to check in/out
-├── checkin.py ✅ Script for check-in
-├── checkout.py 🔴 Script for check-out
-├── requirements.txt 📦 Python dependencies
-├── .env 🔐 Environment variables (excluded from Git)
-
-
 ---
 
 🧠 How it works
